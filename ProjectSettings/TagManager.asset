@@ -42,6 +42,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: CockpitUI
+    uniqueID: 4236321355
+    locked: 0
+  - name: EnemyLock
+    uniqueID: 1095200631
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1

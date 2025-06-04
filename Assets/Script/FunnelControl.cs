@@ -13,7 +13,7 @@ public class FunnelControl : MonoBehaviour
     public Transform dockPoint;
 
     [Tooltip("目标锁定系统，提供当前选中目标")]
-    public EnemySensor enemySensor;
+    public EnemySensorUI enemySensorUI;
 
     [Tooltip("浮游炮激光发射点 Transform（可为炮口）")]
     public Transform firePoint;
@@ -57,7 +57,6 @@ public class FunnelControl : MonoBehaviour
 
     // 私有变量
     private float attackTimer = 0f;
-    private float shootCooldown = 0f;
     private float orbitLerpTime = 0f;
 
     private Transform lockedTarget = null;
@@ -69,7 +68,7 @@ public class FunnelControl : MonoBehaviour
 
     void Start()
     {
-        if (!hostMech || !dockPoint || !enemySensor)
+        if (!hostMech || !dockPoint || !enemySensorUI)
             Debug.LogError("FunnelController 缺少关键引用！");
 
         transform.position = dockPoint.position;
@@ -103,9 +102,9 @@ public class FunnelControl : MonoBehaviour
 
     public void ActivateFunnel()
     {
-        if (enemySensor.HasTarget)
+        if (enemySensorUI.HasTarget)
         {
-            GameObject currentTarget = enemySensor.GetSelectedEnemy();
+            GameObject currentTarget = enemySensorUI.GetSelectedEnemy();
             if (currentTarget == null) return;
 
             lockedTarget = currentTarget.transform;
@@ -149,7 +148,6 @@ public class FunnelControl : MonoBehaviour
             nextOrbitPos = targetPos + Random.onUnitSphere * orbitRadius;
 
             orbitLerpTime = 0f;
-            shootCooldown = 0f;
             attackTimer = attackDuration;
 
             currentState = FunnelState.Attacking;
