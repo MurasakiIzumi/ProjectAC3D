@@ -25,7 +25,6 @@ public class FunnelLauncher : MonoBehaviour
     public float rechargeDuration = 3f;
 
     // 内部状态
-    private bool isPressing = false;
     private float pressTimer = 0f;
 
     private bool leftLaunched = false;
@@ -59,7 +58,6 @@ public class FunnelLauncher : MonoBehaviour
     {
         if (Input.GetKeyDown(launchKey))
         {
-            isPressing = true;
             pressTimer = 0f;
         }
 
@@ -71,7 +69,6 @@ public class FunnelLauncher : MonoBehaviour
         if (Input.GetKeyUp(launchKey))
         {
             bool isLongPress = pressTimer >= longPressThreshold;
-            isPressing = false;
             pressTimer = 0f;
 
             TryLaunch(isLongPress);
@@ -141,7 +138,6 @@ public class FunnelLauncher : MonoBehaviour
             funnelCooldownTimers[funnel] -= Time.deltaTime;
             if (funnelCooldownTimers[funnel] <= 0f)
             {
-                Debug.Log($"浮游炮 {funnel.name} 已完成充能，可重新发射！");
                 funnelCooldownTimers.Remove(funnel);
             }
         }
@@ -149,7 +145,6 @@ public class FunnelLauncher : MonoBehaviour
         if (IsLeftGroupReady() && IsRightGroupReady())
         {
             ResetLauncher();
-            Debug.Log("全部浮游炮已完成充能，发射器已重置");
         }
     }
 

@@ -56,6 +56,16 @@ public class FunnelControl : MonoBehaviour
     [Tooltip("浮游炮飞行时的尾焰粒子系统")]
     public ParticleSystem thrustVFX;
 
+    [Header("音效")]
+    [Tooltip("浮游炮激光发射音效列表，随机播放一个")]
+    public AudioClip[] fireSEClips;
+
+    [Tooltip("浮游炮发射出击音效")]
+    public AudioClip launchSE;
+
+    [Tooltip("浮游炮挂载收纳音效")]
+    public AudioClip dockSE;
+
     // 私有变量
     private float attackTimer = 0f;
     private float orbitLerpTime = 0f;
@@ -113,6 +123,12 @@ public class FunnelControl : MonoBehaviour
             nextOrbitPos = lockedTarget.position + Random.onUnitSphere * orbitRadius;
 
             currentState = FunnelState.LaunchJumpOut;
+
+            // 播放出击音效
+            PlaySE(launchSE);
+
+            // 启用尾焰
+            EnableThrustVFX();
         }
     }
 
@@ -124,8 +140,6 @@ public class FunnelControl : MonoBehaviour
 
     private void LaunchJumpOut()
     {
-        EnableThrustVFX();
-
         transform.position = Vector3.MoveTowards(transform.position, intermediatePos, launchSpeed * Time.deltaTime);
         RotateTowardsMovement(intermediatePos);
 
@@ -213,6 +227,8 @@ public class FunnelControl : MonoBehaviour
 
         if (Vector3.Distance(transform.position, dockPoint.position) < 0.1f)
         {
+            PlaySE(dockSE);
+
             lockedTarget = null;
             currentState = FunnelState.Docked;
 
@@ -227,6 +243,9 @@ public class FunnelControl : MonoBehaviour
         {
             GameObject laser = Instantiate(laserPrefab, firePoint.position, Quaternion.identity);
             laser.transform.LookAt(targetTransform.position);
+
+            // 在此添加音效播放
+            PlayFireSE();
         }
     }
 
@@ -250,5 +269,25 @@ public class FunnelControl : MonoBehaviour
     {
         if (thrustVFX && thrustVFX.isPlaying)
             thrustVFX.Stop();
+    }
+
+    private void PlayFireSE()
+    {
+        AudioSource audio = GetComponent<AudioSource>();
+        if (audio && fireSEClips != null && fireSEClips.Length > 0)
+        {
+            int index = Random.Range(0, fireSEClips.Length);
+            AudioClip chosen = fireSEClips[index];
+            audio.PlayOneShot(chosen);
+        }
+    }
+
+    private void PlaySE(AudioClip clip)
+    {
+        AudioSource audio = GetComponent<AudioSource>();
+        if (audio && clip)
+        {
+            audio.PlayOneShot(clip);
+        }
     }
 }

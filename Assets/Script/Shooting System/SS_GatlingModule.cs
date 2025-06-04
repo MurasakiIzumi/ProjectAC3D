@@ -26,6 +26,16 @@ public class SS_GatlingModule : MonoBehaviour, IWeaponContinuous
     [Tooltip("命中表现FX控制器")]
     public SS_GatlingImpactFX impactFX;
 
+    [Header("射击音效")]
+    [Tooltip("从第几秒开始进入循环区段")]
+    public float loopStartTime = 0.3f;
+
+    [Tooltip("从第几秒开始是尾响段")]
+    public float tailStartTime = 4.8f;
+
+    [Tooltip("完整音频")]
+    public AudioSource fullClipSource;
+
     private bool isFiring = false;
 
     public void Fire()
@@ -33,6 +43,17 @@ public class SS_GatlingModule : MonoBehaviour, IWeaponContinuous
         if (!CanFire()) return;
 
         ammoCount--;
+
+        if (!isFiring)
+        {
+            isFiring = true;
+
+            fullClipSource.Stop();
+            fullClipSource.time = 0f;
+            fullClipSource.Play();
+
+            InvokeRepeating(nameof(LoopIfNeeded), 0.1f, 0.05f);
+        }
 
         Vector3 fireDir = mainCamera ? mainCamera.transform.forward : transform.forward;
         Vector3 fireOrigin = firePoint ? firePoint.position : transform.position;
@@ -47,7 +68,16 @@ public class SS_GatlingModule : MonoBehaviour, IWeaponContinuous
 
     public void Stop()
     {
-        isFiring = false;
+        if (isFiring)
+        {
+            isFiring = false;
+            CancelInvoke(nameof(LoopIfNeeded));
+
+            if (fullClipSource.isPlaying && fullClipSource.time < tailStartTime)
+            {
+                fullClipSource.time = tailStartTime;
+            }
+        }
     }
 
     public bool CanFire()
@@ -63,5 +93,15 @@ public class SS_GatlingModule : MonoBehaviour, IWeaponContinuous
     public int GetRemainingAmmo()
     {
         return ammoCount;
+    }
+
+    private void LoopIfNeeded()
+    {
+        if (!isFiring) return;
+
+        if (fullClipSource.time >= tailStartTime)
+        {
+            fullClipSource.time = loopStartTime;
+        }
     }
 }

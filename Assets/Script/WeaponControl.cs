@@ -82,17 +82,14 @@ public class WeaponControl : MonoBehaviour
                     var w = group.weapons[i];
                     if (w == null)
                     {
-                        Debug.LogWarning($"[WeaponControl] 武器{i} 是 null");
                         continue;
                     }
 
                     if (!w.CanFire())
                     {
-                        Debug.Log($"[WeaponControl] 武器{i} 无法开火（CanFire=false）");
                         continue;
                     }
 
-                    Debug.Log($"[WeaponControl] 触发武器{i} 开火");
                     w.Fire();
                     hasFired = true;
                 }

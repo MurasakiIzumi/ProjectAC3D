@@ -26,6 +26,12 @@ public class CameraRigContol : MonoBehaviour
 
     private float pitch = 0f; // 当前仰角（垂直方向）
 
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked; // 锁定鼠标到屏幕中心
+        Cursor.visible = false;                   // 隐藏鼠标光标
+    }
+
     void Update()
     {
         if (!enableLook || horizontalPivot == null || verticalPivot == null) return;

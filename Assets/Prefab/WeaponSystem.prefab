@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6915730350857825932}
   - component: {fileID: 3452668806206877122}
+  - component: {fileID: 282913009579034789}
   m_Layer: 0
   m_Name: Gatling(R)
   m_TagString: Untagged
@@ -54,6 +55,106 @@ MonoBehaviour:
   firePoint: {fileID: 2315015594220647210}
   tracerFX: {fileID: 6020606432206923556}
   impactFX: {fileID: 568746610087456853}
+  loopStartTime: 0.07
+  tailStartTime: 13.2
+  fullClipSource: {fileID: 282913009579034789}
+--- !u!82 &282913009579034789
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496046923673347396}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 03d771713c5b79040b69af09b781bd04, type: 3}
+  m_Resource: {fileID: 8300000, guid: 03d771713c5b79040b69af09b781bd04, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.3
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 30
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2114252363578991683
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,6 +347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1036626546911784633}
   - component: {fileID: 7848869671764241350}
+  - component: {fileID: 666240640749801011}
   m_Layer: 0
   m_Name: Gatling(L)
   m_TagString: Untagged
@@ -290,6 +392,106 @@ MonoBehaviour:
   firePoint: {fileID: 4887242133510323572}
   tracerFX: {fileID: 898672485384214163}
   impactFX: {fileID: 2748129150280093923}
+  loopStartTime: 0.07
+  tailStartTime: 13.2
+  fullClipSource: {fileID: 666240640749801011}
+--- !u!82 &666240640749801011
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2769120417582704316}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 03d771713c5b79040b69af09b781bd04, type: 3}
+  m_Resource: {fileID: 8300000, guid: 03d771713c5b79040b69af09b781bd04, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.3
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 30
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3242314909209211359
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,9 +782,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2daa551181e6c54fb6bd09b47b39834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultImpactPrefab: {fileID: 4389103333164344745, guid: 1cd7063a372417f46aca834508169d86, type: 3}
-  metalImpactPrefab: {fileID: 0}
-  shieldImpactPrefab: {fileID: 0}
+  defaultImpactPrefab: {fileID: 6103176159538053279, guid: 3dea8d78541ae924795d9729f760d393, type: 3}
+  metalImpactPrefab: {fileID: 4389103333164344745, guid: 1cd7063a372417f46aca834508169d86, type: 3}
+  shieldImpactPrefab: {fileID: 4389103333164344745, guid: 1cd7063a372417f46aca834508169d86, type: 3}
+  impactSounds:
+  - {fileID: 8300000, guid: 1473c05081a497e45ae1343d36a6048a, type: 3}
+  - {fileID: 8300000, guid: f7c76290d2858474998294371d41dfdb, type: 3}
+  - {fileID: 8300000, guid: e56a67c0eb98243409536a504396bc21, type: 3}
+  - {fileID: 8300000, guid: 3328677588d9646479cf547001f0411d, type: 3}
+  enemyHitSounds:
+  - {fileID: 8300000, guid: 7f03fe8c4cef4e443a9fea241b6247fb, type: 3}
+  - {fileID: 8300000, guid: 2c55c00e039a68a459171e20ca6c0b86, type: 3}
+  - {fileID: 8300000, guid: 476dd97c2de3595488f3c16e1548aa9d, type: 3}
+  - {fileID: 8300000, guid: f729cb6ef860d7b4a9eafda3f7e9ea84, type: 3}
   impactDuration: 0.4
 --- !u!1 &8696586776248872344
 GameObject:
@@ -659,7 +871,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2daa551181e6c54fb6bd09b47b39834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultImpactPrefab: {fileID: 4389103333164344745, guid: 1cd7063a372417f46aca834508169d86, type: 3}
-  metalImpactPrefab: {fileID: 0}
-  shieldImpactPrefab: {fileID: 0}
+  defaultImpactPrefab: {fileID: 6103176159538053279, guid: 3dea8d78541ae924795d9729f760d393, type: 3}
+  metalImpactPrefab: {fileID: 4389103333164344745, guid: 1cd7063a372417f46aca834508169d86, type: 3}
+  shieldImpactPrefab: {fileID: 4389103333164344745, guid: 1cd7063a372417f46aca834508169d86, type: 3}
+  impactSounds:
+  - {fileID: 8300000, guid: 1473c05081a497e45ae1343d36a6048a, type: 3}
+  - {fileID: 8300000, guid: f7c76290d2858474998294371d41dfdb, type: 3}
+  - {fileID: 8300000, guid: e56a67c0eb98243409536a504396bc21, type: 3}
+  - {fileID: 8300000, guid: 3328677588d9646479cf547001f0411d, type: 3}
+  enemyHitSounds:
+  - {fileID: 8300000, guid: 7f03fe8c4cef4e443a9fea241b6247fb, type: 3}
+  - {fileID: 8300000, guid: 2c55c00e039a68a459171e20ca6c0b86, type: 3}
+  - {fileID: 8300000, guid: 476dd97c2de3595488f3c16e1548aa9d, type: 3}
+  - {fileID: 8300000, guid: f729cb6ef860d7b4a9eafda3f7e9ea84, type: 3}
   impactDuration: 0.4
