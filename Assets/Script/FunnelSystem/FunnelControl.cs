@@ -4,6 +4,7 @@ public class FunnelControl : MonoBehaviour
 {
     public enum FunnelState { Docked, LaunchJumpOut, LaunchToTarget, Attacking, ReturnToApproach, Returning }
     public FunnelState currentState = FunnelState.Docked;
+    public System.Action<FunnelControl> onDocked;
 
     [Header("引用组件")]
     [Tooltip("机体本体 Transform，用于参考方向等")]
@@ -212,8 +213,11 @@ public class FunnelControl : MonoBehaviour
 
         if (Vector3.Distance(transform.position, dockPoint.position) < 0.1f)
         {
-            lockedTarget = null; // 清除缓存，准备下次新目标
+            lockedTarget = null;
             currentState = FunnelState.Docked;
+
+            // 通知 Launcher：已完成回收
+            onDocked?.Invoke(this);
         }
     }
 
