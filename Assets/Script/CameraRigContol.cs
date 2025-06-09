@@ -3,8 +3,11 @@
 public class CameraRigContol : MonoBehaviour
 {
     [Header("旋转灵敏度")]
-    [Tooltip("鼠标控制灵敏度")]
-    public float sensitivity = 2f;
+    [Tooltip("鼠标控制水平灵敏度（左右）")]
+    public float horizontalSensitivity = 2f;
+
+    [Tooltip("鼠标控制垂直灵敏度（上下）")]
+    public float verticalSensitivity = 2f;
 
     [Header("水平旋转轴体，例如CameraRig")]
     [Tooltip("控制左右视角的旋转轴体")]
@@ -36,8 +39,8 @@ public class CameraRigContol : MonoBehaviour
     {
         if (!enableLook || horizontalPivot == null || verticalPivot == null) return;
 
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
+        float mouseX = Input.GetAxis("Mouse X") * horizontalSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * verticalSensitivity;
 
         pitch -= mouseY;
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch); // 使用可配置范围
