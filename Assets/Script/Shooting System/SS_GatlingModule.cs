@@ -150,4 +150,9 @@ public class SS_GatlingModule : MonoBehaviour, IWeaponContinuous
             fullClipSource.time = loopStartTime;
         }
     }
+
+    public FireMode GetFireMode()
+    {
+        return FireMode.Auto;
+    }
 }

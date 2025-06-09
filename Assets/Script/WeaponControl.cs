@@ -5,6 +5,7 @@ public interface IWeapon
     void Fire();
     bool CanFire();
     float GetFireRate();
+    FireMode GetFireMode();
 }
 
 // 可选支持 Stop() 的持续型武器（如火神炮、盾牌等）
@@ -67,9 +68,23 @@ public class WeaponControl : MonoBehaviour
     {
         if (group.weapons == null || group.weapons.Length == 0) return;
 
-        bool isHeld = Input.GetKey(group.fireKey);
+        // 默认读取第一把武器的模式（假设该组武器 FireMode 一致）
+        var firstWeapon = group.weapons[0];
+        if (firstWeapon == null) return;
 
-        if (isHeld)
+        FireMode mode = FireMode.Auto;
+        if (firstWeapon is USS_Weapon uw)
+        {
+            mode = uw.GetFireMode();
+        }
+
+        // 按当前武器模式选择输入方式
+        bool wantsToFire =
+            mode == FireMode.Auto ? Input.GetKey(group.fireKey) :
+            mode == FireMode.SemiAuto ? Input.GetKeyDown(group.fireKey) :
+            false;
+
+        if (wantsToFire)
         {
             group.isFiring = true;
 
@@ -80,15 +95,8 @@ public class WeaponControl : MonoBehaviour
                 for (int i = 0; i < group.weapons.Length; i++)
                 {
                     var w = group.weapons[i];
-                    if (w == null)
-                    {
-                        continue;
-                    }
-
-                    if (!w.CanFire())
-                    {
-                        continue;
-                    }
+                    if (w == null) continue;
+                    if (!w.CanFire()) continue;
 
                     w.Fire();
                     hasFired = true;
@@ -96,7 +104,7 @@ public class WeaponControl : MonoBehaviour
 
                 if (hasFired)
                 {
-                    float interval = 60f / group.weapons[0].GetFireRate();
+                    float interval = 60f / firstWeapon.GetFireRate();
                     group.nextFireTime = Time.time + interval;
                 }
             }
