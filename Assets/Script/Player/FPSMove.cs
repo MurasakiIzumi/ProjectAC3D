@@ -127,22 +127,24 @@ public class FPSMove : MonoBehaviour
 
     void TryStartDash()
     {
-        Vector3 dir = GetInputDirection();
-        if (dir.sqrMagnitude < 0.1f)
-            dir = GetCameraForward();
+        Vector3 inputDir = GetInputDirection();
+        if (inputDir.sqrMagnitude < 0.1f)
+            inputDir = GetCameraForward();
 
         float minEnergy = dashEnergyPerSecond * 0.1f;
         if (currentEnergy < minEnergy) return;
 
-        dashDirection = dir.normalized;
+        // 设置冲刺方向（世界方向）
+        dashDirection = inputDir.normalized;
         isDashing = true;
         dashTimer = 0f;
 
-        // 判断是否横向冲刺，决定镜头倾斜角度
-        float dotRight = Vector3.Dot(dashDirection, GetCameraRight());
-        if (dotRight > 0.7f)
+        // --- 关键修复点：在玩家视角中判断冲刺方向 ---
+        Vector3 localDashDir = cameraRig.InverseTransformDirection(dashDirection);
+
+        if (localDashDir.x > 0.7f)
             targetTiltZ = +maxTiltAngle;
-        else if (dotRight < -0.7f)
+        else if (localDashDir.x < -0.7f)
             targetTiltZ = -maxTiltAngle;
         else
             targetTiltZ = 0f;

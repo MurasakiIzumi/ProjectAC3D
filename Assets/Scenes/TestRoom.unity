@@ -1067,6 +1067,11 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!4 &709558385 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4639793803921180716, guid: b397e2b1c0d514d4b9138c8969e95bf0, type: 3}
+  m_PrefabInstance: {fileID: 2748062376742378192}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &741853602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1558,7 +1563,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 977759799}
+  - {fileID: 1123879480}
   - {fileID: 67270505}
   - {fileID: 124868212}
   - {fileID: 2135469653}
@@ -1763,50 +1768,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraRig: {fileID: 1123879480}
   visualRoot: {fileID: 67270505}
-  cameraTiltRoot: {fileID: 977759799}
-  moveSpeed: 5
-  dashSpeed: 20
-  dashTapDuration: 0.25
-  dashMaxHoldTime: 1
-  dashEnergyPerSecond: 30
+  cameraTiltRoot: {fileID: 709558385}
+  moveSpeed: 8
+  dashSpeed: 25
+  dashTapDuration: 1
+  dashMaxHoldTime: 10
+  dashEnergyPerSecond: 20
   maxEnergy: 100
   energyRecoveryRate: 50
   energyRecoveryDelay: 1.5
-  maxTiltAngle: 8
-  tiltInSpeed: 60
-  tiltOutSpeed: 30
---- !u!1 &977759798
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 977759799}
-  m_Layer: 3
-  m_Name: CameraTiltContainer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &977759799
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 977759798}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1123879480}
-  m_Father: {fileID: 963802681}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  maxTiltAngle: 10
+  tiltInSpeed: 75
+  tiltOutSpeed: 15
 --- !u!1 &983355468
 GameObject:
   m_ObjectHideFlags: 0
@@ -3448,7 +3421,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 977759799}
+    m_TransformParent: {fileID: 963802681}
     m_Modifications:
     - target: {fileID: 397759113249676981, guid: b397e2b1c0d514d4b9138c8969e95bf0, type: 3}
       propertyPath: useAutoConverge
@@ -3467,8 +3440,12 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 539667958582735820, guid: b397e2b1c0d514d4b9138c8969e95bf0, type: 3}
+      propertyPath: recoverySpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 539667958582735820, guid: b397e2b1c0d514d4b9138c8969e95bf0, type: 3}
       propertyPath: swayAmplitudeX
-      value: 0.6
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 539667958582735820, guid: b397e2b1c0d514d4b9138c8969e95bf0, type: 3}
       propertyPath: swayAmplitudeY
@@ -3532,11 +3509,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1599567231586902246, guid: b397e2b1c0d514d4b9138c8969e95bf0, type: 3}
       propertyPath: recoverySpeed
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1599567231586902246, guid: b397e2b1c0d514d4b9138c8969e95bf0, type: 3}
       propertyPath: swayAmplitudeX
-      value: 0.6
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1599567231586902246, guid: b397e2b1c0d514d4b9138c8969e95bf0, type: 3}
       propertyPath: swayAmplitudeY
@@ -3640,7 +3617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6911776957916897138, guid: b397e2b1c0d514d4b9138c8969e95bf0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6911776957916897138, guid: b397e2b1c0d514d4b9138c8969e95bf0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3715,8 +3692,12 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7927298736309715804, guid: b397e2b1c0d514d4b9138c8969e95bf0, type: 3}
+      propertyPath: recoverySpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7927298736309715804, guid: b397e2b1c0d514d4b9138c8969e95bf0, type: 3}
       propertyPath: swayAmplitudeX
-      value: 0.6
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7927298736309715804, guid: b397e2b1c0d514d4b9138c8969e95bf0, type: 3}
       propertyPath: swayAmplitudeY
