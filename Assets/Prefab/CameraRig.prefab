@@ -73,7 +73,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 2b8cbc3dc72a61348b241b83b305f158, type: 2}
   m_TargetDisplay: 0
@@ -217,7 +217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26dfb43088bdb5747b87473d2fd04a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 2
+  horizontalSensitivity: 2
+  verticalSensitivity: 2
   horizontalPivot: {fileID: 6911776957916897138}
   verticalPivot: {fileID: 542158009709365477}
   minPitch: -45
@@ -295,7 +296,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 31
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 0d01c89c04c75b44d91315079b6e102e, type: 2}
   m_TargetDisplay: 0
@@ -423,7 +424,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 31
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 1e5467bee21c8d34ca5857776acf566f, type: 2}
   m_TargetDisplay: 0
