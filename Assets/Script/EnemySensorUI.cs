@@ -238,4 +238,15 @@ public class EnemySensorUI : MonoBehaviour
 
     // 是否存在有效目标（兼容GUI接口）
     public bool HasTarget => GetSelectedEnemy() != null;
+
+    public bool IsSelectedTargetVisible()
+    {
+        GameObject target = GetSelectedEnemy();
+        if (target == null) return false;
+
+        float distance = Vector3.Distance(sensorCamera.transform.position, target.transform.position);
+        if (distance > maxLockDistance) return false;
+
+        return IsEnemyVisible(target.transform);
+    }
 }

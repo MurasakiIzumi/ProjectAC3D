@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// 驾驶舱摄像头伪3D左右晃动控制器（倒U型轨迹 + 平滑启动）
+/// 驾驶舱摄像头伪3D左右晃动控制器（倒U型轨迹 + 平滑起摆）
 /// </summary>
 public class Parallax3DDriver : MonoBehaviour
 {
@@ -25,10 +25,15 @@ public class Parallax3DDriver : MonoBehaviour
     [Tooltip("停止后回正速度")]
     public float recoverySpeed = 5f;
 
+    [Tooltip("启动摆动的平滑时间（秒）")]
+    public float swayStartDuration = 0.2f;
+
     private float swayTimer = 0f;
     private Vector3 currentOffset = Vector3.zero;
     private Vector3 initialLocalPosition;
+
     private bool wasMovingLastFrame = false;
+    private float swayWeight = 0f; // 平滑启动因子
 
     void Awake()
     {
@@ -46,19 +51,22 @@ public class Parallax3DDriver : MonoBehaviour
 
         if (isMoving)
         {
-            if (!wasMovingLastFrame)
-                swayTimer = 0f;
-
             swayTimer += Time.deltaTime;
             float phase = (swayTimer / swayCycleDuration) * Mathf.PI * 2f;
 
-            float offsetX = Mathf.Sin(phase) * swayAmplitudeX;
-            float offsetY = -Mathf.Abs(Mathf.Sin(phase)) * swayAmplitudeY;
+            // 平滑提升晃动权重
+            swayWeight = Mathf.MoveTowards(swayWeight, 1f, Time.deltaTime / swayStartDuration);
+
+            float offsetX = Mathf.Sin(phase) * swayAmplitudeX * swayWeight;
+            float offsetY = -Mathf.Abs(Mathf.Sin(phase)) * swayAmplitudeY * swayWeight;
 
             currentOffset = new Vector3(offsetX, offsetY, 0f);
         }
         else
         {
+            swayTimer = 0f;
+            swayWeight = 0f;
+
             currentOffset = Vector3.Lerp(currentOffset, Vector3.zero, Time.deltaTime * recoverySpeed);
         }
 
@@ -66,3 +74,4 @@ public class Parallax3DDriver : MonoBehaviour
         transform.localPosition = initialLocalPosition + currentOffset;
     }
 }
+

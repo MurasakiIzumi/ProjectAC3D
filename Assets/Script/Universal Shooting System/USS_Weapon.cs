@@ -154,31 +154,39 @@ public class USS_Weapon : MonoBehaviour, IWeapon
 
     private void UpdateAiming()
     {
-        if (sensorUI == null || weaponPivot == null) return;
+        if (weaponPivot == null) return;
 
-        GameObject targetObject = sensorUI.GetSelectedEnemy();
-        if (targetObject == null) return;
+        GameObject targetObject = (sensorUI != null && sensorUI.IsSelectedTargetVisible())
+            ? sensorUI.GetSelectedEnemy()
+            : null;
 
-        Vector3 dirToTarget = targetObject.transform.position - weaponPivot.position;
-        Quaternion targetRot = Quaternion.LookRotation(dirToTarget);
+        Quaternion targetRotation;
 
-        Vector3 forward = transform.forward;
-        Vector3 localDir = transform.InverseTransformDirection(dirToTarget.normalized);
+        if (targetObject != null)
+        {
+            // 朝向目标
+            Vector3 dirToTarget = targetObject.transform.position - weaponPivot.position;
 
-        float yaw = Mathf.Atan2(localDir.x, localDir.z) * Mathf.Rad2Deg;
-        float pitch = -Mathf.Asin(localDir.y) * Mathf.Rad2Deg;
-
-        yaw = Mathf.Clamp(yaw, -maxYaw, maxYaw);
-        pitch = Mathf.Clamp(pitch, -maxPitch, maxPitch);
-
-        Vector3 clampedDir = Quaternion.Euler(pitch, yaw, 0f) * Vector3.forward;
-        Vector3 worldClampedDir = transform.TransformDirection(clampedDir);
-
-        Quaternion clampedRotation = Quaternion.LookRotation(worldClampedDir);
+            // Yaw/Pitch 限制（保持你已有的限制逻辑）
+            Vector3 forward = transform.forward;
+            Vector3 localDir = transform.InverseTransformDirection(dirToTarget.normalized);
+            float yaw = Mathf.Atan2(localDir.x, localDir.z) * Mathf.Rad2Deg;
+            float pitch = -Mathf.Asin(localDir.y) * Mathf.Rad2Deg;
+            yaw = Mathf.Clamp(yaw, -maxYaw, maxYaw);
+            pitch = Mathf.Clamp(pitch, -maxPitch, maxPitch);
+            Vector3 clampedDir = Quaternion.Euler(pitch, yaw, 0f) * Vector3.forward;
+            Vector3 worldClampedDir = transform.TransformDirection(clampedDir);
+            targetRotation = Quaternion.LookRotation(worldClampedDir);
+        }
+        else
+        {
+            // 回正方向（面向机体 forward）
+            targetRotation = Quaternion.LookRotation(transform.forward);
+        }
 
         weaponPivot.rotation = Quaternion.RotateTowards(
             weaponPivot.rotation,
-            clampedRotation,
+            targetRotation,
             aimRotateSpeed * Time.deltaTime
         );
     }

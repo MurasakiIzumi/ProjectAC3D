@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public interface IWeapon
 {
@@ -61,11 +62,17 @@ public class WeaponControl : MonoBehaviour
 
     private void InitWeaponGroup(WeaponBinding group)
     {
-        group.weapons = new IWeapon[group.weaponComponents.Length];
-        for (int i = 0; i < group.weaponComponents.Length; i++)
+        var validWeapons = new List<IWeapon>();
+
+        foreach (var mb in group.weaponComponents)
         {
-            group.weapons[i] = group.weaponComponents[i] as IWeapon;
+            if (mb != null && mb.gameObject.activeInHierarchy && mb is IWeapon w)
+            {
+                validWeapons.Add(w);
+            }
         }
+
+        group.weapons = validWeapons.ToArray();
     }
 
     private void HandleWeaponGroup(WeaponBinding group)
