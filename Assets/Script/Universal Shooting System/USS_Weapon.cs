@@ -20,21 +20,39 @@ public class USS_Weapon : MonoBehaviour, IWeapon
     [Tooltip("自动武器的射速（发/秒）")]
     public float autoFireRate = 10f;
 
+    [Tooltip("每次射击消耗的子弹数")]
+    public int ammoPerShot = 1;
+
     [Tooltip("是否在弹尽时自动丢弃武器")]
     public bool discardOnEmpty = false;
 
     [Header("弹药设定")]
-    [Tooltip("最大弹容量")]
-    public int maxAmmo = 30;
-
-    [Tooltip("当前弹药数量")]
+    [Tooltip("当前弹药数量（对能量武器为当前能量；对实弹为弹匣剩余）")]
     public int currentAmmo = 30;
 
-    [Tooltip("是否启用能量自动回复")]
+    [Tooltip("单个弹匣容量（仅实弹武器使用）")]
+    public int magazineSize = 30;
+
+    [Tooltip("备弹数量（仅实弹武器使用）")]
+    public int backupAmmo = 90;
+
+    [Tooltip("能量武器最大弹容量（用于UI显示，非实弹武器可设为100等）")]
+    public int maxEnergyAmmo = 100;
+
+    [Tooltip("是否启用能量自动回复（如为能量武器请开启）")]
     public bool autoRecoverAmmo = false;
 
     [Tooltip("能量回复速度（单位：每秒）")]
     public float recoverRate = 1f;
+
+    [Tooltip("射击后等待多久才开始恢复能量（秒）")]
+    public float energyRecoverDelay = 1.5f;
+
+    [Tooltip("是否使用手动换弹机制（如为能量武器请关闭）")]
+    public bool usesReload = true;
+
+    [Tooltip("换弹耗时（秒）")]
+    public float reloadDuration = 2f;
 
     [Header("枪口旋转设定")]
     [SerializeField, Tooltip("敌人锁定系统（EnemySensorUI）")]
@@ -73,24 +91,58 @@ public class USS_Weapon : MonoBehaviour, IWeapon
     public AudioClip semiAutoFireSE;
 
     private float nextFireTime;
-    private float loopTimer;
     private bool isLooping;
     private AudioSource audioSource;
+
+    private bool isReloading = false;
+    private float reloadEndTime = 0f;
+    private float ammoRecoverBuffer = 0f;
+    private float lastFireTime = -999f;
+    public bool IsReloading => isReloading;
 
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        if (usesReload)
+        {
+            currentAmmo = magazineSize;
+        }
+        else
+        {
+            currentAmmo = maxEnergyAmmo;
+        }
     }
 
     void Update()
     {
         UpdateAiming();
-        if (autoRecoverAmmo && currentAmmo < maxAmmo)
+
+        // 能量型武器弹药回复
+        if (autoRecoverAmmo && currentAmmo < maxEnergyAmmo && Time.time >= lastFireTime + energyRecoverDelay)
         {
-            currentAmmo += Mathf.FloorToInt(recoverRate * Time.deltaTime);
-            currentAmmo = Mathf.Min(currentAmmo, maxAmmo);
+            ammoRecoverBuffer += recoverRate * Time.deltaTime;
+
+            if (ammoRecoverBuffer >= 1f)
+            {
+                int gained = Mathf.FloorToInt(ammoRecoverBuffer);
+                currentAmmo = Mathf.Min(currentAmmo + gained, maxEnergyAmmo);
+                ammoRecoverBuffer -= gained;
+            }
         }
 
+        // 换弹完成逻辑（仅对 usesReload 武器生效）
+        if (isReloading && Time.time >= reloadEndTime)
+        {
+            isReloading = false;
+
+            int needed = magazineSize - currentAmmo;
+            int reloadAmount = Mathf.Min(needed, backupAmmo);
+
+            currentAmmo += reloadAmount;
+            backupAmmo -= reloadAmount;
+        }
+
+        // 自动武器循环段音效维护
         if (fireMode == FireMode.Auto && isLooping)
         {
             if (audioSource.time >= loopEndTime)
@@ -110,7 +162,6 @@ public class USS_Weapon : MonoBehaviour, IWeapon
         Vector3 dirToTarget = targetObject.transform.position - weaponPivot.position;
         Quaternion targetRot = Quaternion.LookRotation(dirToTarget);
 
-        // 角度限制处理（基于本体朝向，限制旋转范围）
         Vector3 forward = transform.forward;
         Vector3 localDir = transform.InverseTransformDirection(dirToTarget.normalized);
 
@@ -132,10 +183,9 @@ public class USS_Weapon : MonoBehaviour, IWeapon
         );
     }
 
-
     public bool CanFire()
     {
-        return currentAmmo > 0 && Time.time >= nextFireTime;
+        return currentAmmo >= ammoPerShot && !isReloading && Time.time >= nextFireTime;
     }
 
     public float GetFireRate()
@@ -153,9 +203,9 @@ public class USS_Weapon : MonoBehaviour, IWeapon
             Instantiate(bulletPrefab, muzzlePoint.position, muzzlePoint.rotation);
         }
 
-        currentAmmo--;
+        currentAmmo -= ammoPerShot;
 
-        if (discardOnEmpty && currentAmmo <= 0)
+        if (discardOnEmpty && usesReload && (currentAmmo + backupAmmo) <= 0)
         {
             Destroy(gameObject);
             return;
@@ -178,6 +228,17 @@ public class USS_Weapon : MonoBehaviour, IWeapon
 
         float interval = 1f / GetFireRate();
         nextFireTime = Time.time + interval;
+        lastFireTime = Time.time;
+    }
+
+    public void Reload()
+    {
+        if (!usesReload || isReloading || currentAmmo >= magazineSize || backupAmmo <= 0) return;
+
+        isReloading = true;
+        reloadEndTime = Time.time + reloadDuration;
+
+        // 此处可接入换弹音效或动画
     }
 
     public void StopLoopSound()

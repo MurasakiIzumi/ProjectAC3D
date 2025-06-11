@@ -1754,6 +1754,7 @@ MonoBehaviour:
     currentWeaponIndex: 0
     nextFireTime: 0
     isFiring: 0
+  reloadModifierKey: 114
 --- !u!114 &963802689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2326,11 +2327,17 @@ MonoBehaviour:
   fireMode: 1
   semiAutoMaxRate: 3
   autoFireRate: 10
-  discardOnEmpty: 0
-  maxAmmo: 180
-  currentAmmo: 180
-  autoRecoverAmmo: 0
-  recoverRate: 1
+  ammoPerShot: 30
+  discardOnEmpty: 1
+  currentAmmo: 30
+  magazineSize: 30
+  backupAmmo: 30
+  maxEnergyAmmo: 100
+  autoRecoverAmmo: 1
+  recoverRate: 5
+  energyRecoverDelay: 2
+  usesReload: 0
+  reloadDuration: 2
   sensorUI: {fileID: 983355470}
   aimRotateSpeed: 180
   maxYaw: 30
@@ -2340,7 +2347,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7569516528875139873, guid: cbaf97152a2093947b9704e93bc762a3, type: 3}
   autoFireSE: {fileID: 8300000, guid: e22dd4ef033a63d46baffdcb1749f05b, type: 3}
   loopStartTime: 0
-  loopEndTime: 0
+  loopEndTime: 1
   semiAutoFireSE: {fileID: 8300000, guid: e22dd4ef033a63d46baffdcb1749f05b, type: 3}
 --- !u!1001 &1381973195
 PrefabInstance:

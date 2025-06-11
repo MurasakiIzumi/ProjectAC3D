@@ -41,6 +41,10 @@ public class WeaponControl : MonoBehaviour
     [Tooltip("右手武装组")]
     public WeaponBinding rightGroup;
 
+    [Header("通用换弹设置")]
+    [Tooltip("换弹功能按键（需与射击键组合使用）")]
+    public KeyCode reloadModifierKey = KeyCode.R;
+
     private void Awake()
     {
         InitWeaponGroup(gatlingGroup);
@@ -76,6 +80,19 @@ public class WeaponControl : MonoBehaviour
         if (firstWeapon is USS_Weapon uw)
         {
             mode = uw.GetFireMode();
+        }
+
+        // 检查是否触发换弹（组合键：换弹键 + 射击键）
+        if (Input.GetKey(reloadModifierKey) && Input.GetKeyDown(group.fireKey))
+        {
+            foreach (var w in group.weapons)
+            {
+                if (w is USS_Weapon weapon && weapon.usesReload)
+                {
+                    weapon.Reload();
+                }
+            }
+            return; // 本帧跳过射击逻辑
         }
 
         // 按当前武器模式选择输入方式
