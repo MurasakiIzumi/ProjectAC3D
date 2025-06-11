@@ -67,9 +67,9 @@ MonoBehaviour:
   weaponPivot: {fileID: 3981882625022057380}
   muzzlePoint: {fileID: 8875005696226585698}
   bulletPrefab: {fileID: 7569516528875139873, guid: cbaf97152a2093947b9704e93bc762a3, type: 3}
-  autoFireSE: {fileID: 8300000, guid: 347acef461c2bca43936cd6e3de12572, type: 3}
+  autoFireSE: {fileID: 8300000, guid: 2bff0186a5c1a454383de7a1f944161b, type: 3}
   loopStartTime: 0
-  loopEndTime: 1
+  loopEndTime: 0.5
   semiAutoFireSE: {fileID: 0}
 --- !u!82 &2127538324875915914
 AudioSource:

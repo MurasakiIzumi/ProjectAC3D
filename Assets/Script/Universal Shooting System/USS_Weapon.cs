@@ -7,7 +7,7 @@ public enum FireMode
 }
 
 [RequireComponent(typeof(AudioSource))]
-public class USS_Weapon : MonoBehaviour, IWeapon
+public class USS_Weapon : MonoBehaviour, IWeapon, IWeaponContinuous
 {
     [Header("基础设定")]
     [Tooltip("当前武器的射击模式")]
@@ -145,7 +145,11 @@ public class USS_Weapon : MonoBehaviour, IWeapon
         // 自动武器循环段音效维护
         if (fireMode == FireMode.Auto && isLooping)
         {
-            if (audioSource.time >= loopEndTime)
+            if (!CanFire())
+            {
+                StopLoopSound(); // 提前终止循环 → 播放尾音
+            }
+            else if (audioSource.time >= loopEndTime)
             {
                 audioSource.time = loopStartTime;
             }
@@ -254,7 +258,12 @@ public class USS_Weapon : MonoBehaviour, IWeapon
         if (isLooping)
         {
             isLooping = false;
-            audioSource.loop = false;
+            audioSource.time = loopEndTime;
         }
+    }
+
+    public void Stop()
+    {
+        StopLoopSound();
     }
 }

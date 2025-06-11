@@ -28,12 +28,21 @@ public class Parallax3DDriver : MonoBehaviour
     [Tooltip("启动摆动的平滑时间（秒）")]
     public float swayStartDuration = 0.2f;
 
+    [Header("音效")]
+    [Tooltip("晃动至顶点时播放的脚步声")]
+    public AudioClip stepSE;
+
+    [Tooltip("音效播放组件")]
+    public AudioSource audioSource;
+
     private float swayTimer = 0f;
     private Vector3 currentOffset = Vector3.zero;
     private Vector3 initialLocalPosition;
 
     private bool wasMovingLastFrame = false;
     private float swayWeight = 0f; // 平滑启动因子
+    private float previousSin = 0f;  // 上一帧的 sin 值
+    private bool hasPlayedFirstStep = false;
 
     void Awake()
     {
@@ -57,17 +66,25 @@ public class Parallax3DDriver : MonoBehaviour
             // 平滑提升晃动权重
             swayWeight = Mathf.MoveTowards(swayWeight, 1f, Time.deltaTime / swayStartDuration);
 
-            float offsetX = Mathf.Sin(phase) * swayAmplitudeX * swayWeight;
-            float offsetY = -Mathf.Abs(Mathf.Sin(phase)) * swayAmplitudeY * swayWeight;
+            float sinVal = Mathf.Sin(phase);
+
+            // 检查是否过零点 → 播放脚步声
+            if ((previousSin <= 0f && sinVal > 0f) || (previousSin >= 0f && sinVal < 0f))
+            {
+                // 允许第一次播放时使用较低的swayWeight阈值
+                float dynamicThreshold = wasMovingLastFrame ? 0.7f : 0.05f;
+
+                if (swayWeight > dynamicThreshold && audioSource != null && stepSE != null)
+                {
+                    audioSource.PlayOneShot(stepSE);
+                }
+            }
+            previousSin = sinVal;
+
+            float offsetX = sinVal * swayAmplitudeX * swayWeight;
+            float offsetY = -Mathf.Abs(sinVal) * swayAmplitudeY * swayWeight;
 
             currentOffset = new Vector3(offsetX, offsetY, 0f);
-        }
-        else
-        {
-            swayTimer = 0f;
-            swayWeight = 0f;
-
-            currentOffset = Vector3.Lerp(currentOffset, Vector3.zero, Time.deltaTime * recoverySpeed);
         }
 
         wasMovingLastFrame = isMoving;

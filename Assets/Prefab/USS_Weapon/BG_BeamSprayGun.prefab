@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8149709432844612167
 Transform:
   m_ObjectHideFlags: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
   autoFireSE: {fileID: 0}
   loopStartTime: 0
   loopEndTime: 0
-  semiAutoFireSE: {fileID: 8300000, guid: 347acef461c2bca43936cd6e3de12572, type: 3}
+  semiAutoFireSE: {fileID: 8300000, guid: 971a6f0280159a74796572ab242c92c5, type: 3}
 --- !u!82 &7831962353175913285
 AudioSource:
   m_ObjectHideFlags: 0

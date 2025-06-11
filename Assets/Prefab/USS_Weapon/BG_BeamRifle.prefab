@@ -103,7 +103,7 @@ MonoBehaviour:
   autoFireSE: {fileID: 0}
   loopStartTime: 0
   loopEndTime: 0
-  semiAutoFireSE: {fileID: 8300000, guid: 347acef461c2bca43936cd6e3de12572, type: 3}
+  semiAutoFireSE: {fileID: 8300000, guid: 2270fc8b814f8f7448432c6eba1a4881, type: 3}
 --- !u!82 &7630154632572084673
 AudioSource:
   m_ObjectHideFlags: 0

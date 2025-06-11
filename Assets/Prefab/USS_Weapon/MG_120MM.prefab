@@ -50,7 +50,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2459409746388011457
 Transform:
   m_ObjectHideFlags: 0
@@ -100,9 +100,9 @@ MonoBehaviour:
   weaponPivot: {fileID: 5326862813810972400}
   muzzlePoint: {fileID: 4820551864147582676}
   bulletPrefab: {fileID: 7569516528875139873, guid: cbaf97152a2093947b9704e93bc762a3, type: 3}
-  autoFireSE: {fileID: 8300000, guid: 347acef461c2bca43936cd6e3de12572, type: 3}
+  autoFireSE: {fileID: 8300000, guid: d8d2ef9a06823144fadf7b9a4b89bd36, type: 3}
   loopStartTime: 0
-  loopEndTime: 1
+  loopEndTime: 1.4
   semiAutoFireSE: {fileID: 0}
 --- !u!82 &7606633011743534761
 AudioSource:
