@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8149709432844612167
 Transform:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   maxPitch: 25
   weaponPivot: {fileID: 4832595441522368639}
   muzzlePoint: {fileID: 3941944464711139231}
-  bulletPrefab: {fileID: 7569516528875139873, guid: cbaf97152a2093947b9704e93bc762a3, type: 3}
+  bulletPrefab: {fileID: 7569516528875139873, guid: 5ac95dd0cce1fd042b48308003ce5a3d, type: 3}
   autoFireSE: {fileID: 0}
   loopStartTime: 0
   loopEndTime: 0
@@ -193,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 5438676380935066545}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.17, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0.17, z: 0.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

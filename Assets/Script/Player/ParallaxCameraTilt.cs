@@ -42,7 +42,6 @@ public class Parallax3DDriver : MonoBehaviour
     private bool wasMovingLastFrame = false;
     private float swayWeight = 0f; // 平滑启动因子
     private float previousSin = 0f;  // 上一帧的 sin 值
-    private bool hasPlayedFirstStep = false;
 
     void Awake()
     {

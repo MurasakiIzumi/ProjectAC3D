@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.5, z: 0.1}
+  m_LocalScale: {x: 0.1, y: 0.25, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8926812819560253252}
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8e173d95510a6d2429f3e49431379412, type: 2}
+  - {fileID: 2100000, guid: a925ab0a9960a7f46a65cb6874e9a3b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -153,7 +153,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 2
-  m_Color: {r: 1, g: 0.97708035, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.89298964, a: 1}
   m_Intensity: 25
   m_Range: 10
   m_SpotAngle: 30
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: -7694072678209508937}
   - component: {fileID: 4141788124788343494}
   m_Layer: 0
-  m_Name: TestLaser
+  m_Name: USS_BSG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -305,16 +305,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995465ab5b7312f41b1e74138bb309ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  lifeTime: 3
+  speed: 40
+  lifeTime: 4
   useGravity: 0
-  damage: 10
-  penetrationLevel: 5
+  gravityMultiplier: 1
+  damage: 30
+  penetrationLevel: 10
   isEnergy: 1
   canPenetrate: 1
-  penetrationPower: 1
-  penetrationDecay: 1
-  sourceWeapon: {fileID: 0}
+  penetrationPower: 5
+  penetrationDecay: 3
+  sourceWeapon: {fileID: 2725375769207287566, guid: f330301d144bdd54a913a774c966ffc5, type: 3}
   hitEffectPrefabValid: {fileID: 0}
   hitEffectPrefabInvalid: {fileID: 0}
   minEnergyRatio: 0.4

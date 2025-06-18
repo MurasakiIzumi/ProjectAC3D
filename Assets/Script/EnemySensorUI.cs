@@ -232,7 +232,11 @@ public class EnemySensorUI : MonoBehaviour
     public GameObject GetSelectedEnemy()
     {
         if (currentLockIndex >= 0 && currentLockIndex < enemyList.Count)
-            return enemyList[currentLockIndex]?.gameObject;
+        {
+            var target = enemyList[currentLockIndex];
+            if (target == null) return null;  // 检查是否已 Destroy
+            return target.gameObject;
+        }
         return null;
     }
 
