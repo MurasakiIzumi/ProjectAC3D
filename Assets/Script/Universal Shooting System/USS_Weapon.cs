@@ -58,6 +58,9 @@ public class USS_Weapon : MonoBehaviour, IWeapon, IWeaponContinuous
     [SerializeField, Tooltip("敌人锁定系统（EnemySensorUI）")]
     private EnemySensorUI sensorUI;
 
+    [Tooltip("是否使用自动瞄准（锁定目标）")]
+    public bool useAutoAim = true;
+
     [Tooltip("武器朝向的旋转速度（度/秒）")]
     public float aimRotateSpeed = 180f;
 
@@ -69,6 +72,9 @@ public class USS_Weapon : MonoBehaviour, IWeapon, IWeaponContinuous
 
     [Tooltip("用于旋转的武器挂点")]
     public Transform weaponPivot;
+
+    [Tooltip("主监视机")]
+    public Camera aimingCamera;
 
     [Header("发射点")]
     [Tooltip("子弹生成点")]
@@ -147,7 +153,7 @@ public class USS_Weapon : MonoBehaviour, IWeapon, IWeaponContinuous
         {
             if (!CanFire())
             {
-                StopLoopSound(); // 提前终止循环 → 播放尾音
+                StopLoopSound();
             }
             else if (audioSource.time >= loopEndTime)
             {
@@ -160,39 +166,54 @@ public class USS_Weapon : MonoBehaviour, IWeapon, IWeaponContinuous
     {
         if (weaponPivot == null) return;
 
-        GameObject targetObject = (sensorUI != null && sensorUI.IsSelectedTargetVisible())
-            ? sensorUI.GetSelectedEnemy()
-            : null;
-
         Quaternion targetRotation;
 
-        if (targetObject != null)
+        if (useAutoAim && sensorUI != null && sensorUI.IsSelectedTargetVisible())
         {
-            // 朝向目标
-            Vector3 dirToTarget = targetObject.transform.position - weaponPivot.position;
+            GameObject targetObject = sensorUI.GetSelectedEnemy();
+            if (targetObject != null)
+            {
+                // 自瞄模式：朝向锁定目标，使用Yaw/Pitch限制
+                Vector3 dirToTarget = targetObject.transform.position - weaponPivot.position;
 
-            // Yaw/Pitch 限制（保持你已有的限制逻辑）
-            Vector3 forward = transform.forward;
-            Vector3 localDir = transform.InverseTransformDirection(dirToTarget.normalized);
-            float yaw = Mathf.Atan2(localDir.x, localDir.z) * Mathf.Rad2Deg;
-            float pitch = -Mathf.Asin(localDir.y) * Mathf.Rad2Deg;
-            yaw = Mathf.Clamp(yaw, -maxYaw, maxYaw);
-            pitch = Mathf.Clamp(pitch, -maxPitch, maxPitch);
-            Vector3 clampedDir = Quaternion.Euler(pitch, yaw, 0f) * Vector3.forward;
-            Vector3 worldClampedDir = transform.TransformDirection(clampedDir);
-            targetRotation = Quaternion.LookRotation(worldClampedDir);
+                Vector3 localDir = transform.InverseTransformDirection(dirToTarget.normalized);
+                float yaw = Mathf.Atan2(localDir.x, localDir.z) * Mathf.Rad2Deg;
+                float pitch = -Mathf.Asin(localDir.y) * Mathf.Rad2Deg;
+                yaw = Mathf.Clamp(yaw, -maxYaw, maxYaw);
+                pitch = Mathf.Clamp(pitch, -maxPitch, maxPitch);
+                Vector3 clampedDir = Quaternion.Euler(pitch, yaw, 0f) * Vector3.forward;
+                Vector3 worldClampedDir = transform.TransformDirection(clampedDir);
+                targetRotation = Quaternion.LookRotation(worldClampedDir);
+            }
+            else
+            {
+                targetRotation = Quaternion.LookRotation(transform.forward);
+            }
+
+            weaponPivot.rotation = Quaternion.RotateTowards(weaponPivot.rotation, targetRotation, aimRotateSpeed * Time.deltaTime);
         }
         else
         {
-            // 回正方向（面向机体 forward）
-            targetRotation = Quaternion.LookRotation(transform.forward);
-        }
+            // 非自瞄模式：朝向摄像机前方（不做角度限制）
+            Camera cam = aimingCamera != null ? aimingCamera : Camera.main;
+            if (cam != null)
+            {
+                // 提取摄像机前方向
+                Vector3 camForward = cam.transform.forward;
 
-        weaponPivot.rotation = Quaternion.RotateTowards(
-            weaponPivot.rotation,
-            targetRotation,
-            aimRotateSpeed * Time.deltaTime
-        );
+                // 将其转化为本地方向
+                Vector3 localDir = transform.InverseTransformDirection(camForward.normalized);
+
+                // 仅计算 Pitch
+                float pitch = -Mathf.Asin(localDir.y) * Mathf.Rad2Deg;
+                pitch = Mathf.Clamp(pitch, -maxPitch, maxPitch);
+
+                // 仅修改 Pitch，保留当前 Yaw
+                Vector3 currentEuler = weaponPivot.localEulerAngles;
+                currentEuler.x = pitch;
+                weaponPivot.localEulerAngles = currentEuler;
+            }
+        }
     }
 
     public bool CanFire()
@@ -203,7 +224,7 @@ public class USS_Weapon : MonoBehaviour, IWeapon, IWeaponContinuous
     public float GetFireRate()
     {
         float rps = fireMode == FireMode.Auto ? autoFireRate : semiAutoMaxRate;
-        return rps * 60f;  // 转换为发/分钟
+        return rps * 60f;
     }
 
     public void Fire()
@@ -249,8 +270,6 @@ public class USS_Weapon : MonoBehaviour, IWeapon, IWeaponContinuous
 
         isReloading = true;
         reloadEndTime = Time.time + reloadDuration;
-
-        // 此处可接入换弹音效或动画
     }
 
     public void StopLoopSound()
