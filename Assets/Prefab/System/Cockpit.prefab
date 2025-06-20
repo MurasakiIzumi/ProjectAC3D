@@ -126,8 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sourceRigidbody: {fileID: 0}
   moveThreshold: 0.1
-  swayAmplitudeX: 45
-  swayAmplitudeY: 10
+  swayAmplitudeX: 75
+  swayAmplitudeY: 15
   swayCycleDuration: 1.5
   recoverySpeed: 5
 --- !u!1 &618444806583704420
@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 2178791949131408212}
   - component: {fileID: 5934604507814054111}
   - component: {fileID: 1732692290832985571}
+  - component: {fileID: 3695808151025311204}
   m_Layer: 5
   m_Name: RightHand
   m_TagString: Untagged
@@ -263,7 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -280,6 +281,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3695808151025311204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199268076912001701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b479769aa9abb42b8824e198ffd229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mechHealth: {fileID: 0}
+  targetPart: 3
+  healthyThreshold: 0.6
+  damagedThreshold: 0.3
+  criticalFlashThreshold: 0.05
+  flashFrequency: 2
+  healthyColor: {r: 0.23529412, g: 0.5294118, b: 0.15686275, a: 0.78431374}
+  damagedColor: {r: 0.9607843, g: 0.6117647, b: 0, a: 0.78431374}
+  criticalColor: {r: 0.74509805, g: 0, b: 0, a: 0.78431374}
 --- !u!1 &1454625342348630426
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,6 +913,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 539761702567740461}
+  - component: {fileID: 528553382169492800}
+  - component: {fileID: 722899415916311077}
   m_Layer: 5
   m_Name: Status
   m_TagString: Untagged
@@ -924,6 +948,116 @@ RectTransform:
   m_AnchoredPosition: {x: -75, y: -260}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &528553382169492800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2848539525253964370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8881f28e50ad7d848b8c6849d96d103d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alertAudio: {fileID: 722899415916311077}
+--- !u!82 &722899415916311077
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2848539525253964370}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 267d16b097348e4449cab271a286e939, type: 3}
+  m_Resource: {fileID: 8300000, guid: 267d16b097348e4449cab271a286e939, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.05
+  m_Pitch: 0.9
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3551976906821193197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,6 +1419,7 @@ GameObject:
   - component: {fileID: 7963353053227334392}
   - component: {fileID: 1249058968653473793}
   - component: {fileID: 5796537204593060844}
+  - component: {fileID: 7466834770078090791}
   m_Layer: 5
   m_Name: Head
   m_TagString: Untagged
@@ -1332,7 +1467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1349,6 +1484,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7466834770078090791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5177476525878334307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b479769aa9abb42b8824e198ffd229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mechHealth: {fileID: 0}
+  targetPart: 0
+  healthyThreshold: 0.6
+  damagedThreshold: 0.3
+  criticalFlashThreshold: 0.05
+  flashFrequency: 2
+  healthyColor: {r: 0.15686275, g: 0.4509804, b: 0.078431375, a: 0.78431374}
+  damagedColor: {r: 0.88235295, g: 0.53333336, b: 0, a: 0.78431374}
+  criticalColor: {r: 0.627451, g: 0, b: 0, a: 0.78431374}
 --- !u!1 &5481532057216560111
 GameObject:
   m_ObjectHideFlags: 0
@@ -1469,6 +1625,7 @@ GameObject:
   - component: {fileID: 7655999825074853403}
   - component: {fileID: 3725657465916755720}
   - component: {fileID: 4968345308222154743}
+  - component: {fileID: 3859921416919675384}
   m_Layer: 5
   m_Name: Foot
   m_TagString: Untagged
@@ -1516,7 +1673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1533,6 +1690,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3859921416919675384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5705311810513468778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b479769aa9abb42b8824e198ffd229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mechHealth: {fileID: 0}
+  targetPart: 2
+  healthyThreshold: 0.6
+  damagedThreshold: 0.3
+  criticalFlashThreshold: 0.05
+  flashFrequency: 2
+  healthyColor: {r: 0.2747688, g: 0.5698112, b: 0.19607843, a: 0.78431374}
+  damagedColor: {r: 1, g: 0.65, b: 0, a: 0.78431374}
+  criticalColor: {r: 0.78431374, g: 0, b: 0, a: 0.78431374}
 --- !u!1 &6101153373558918614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1591,7 +1769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1619,6 +1797,7 @@ GameObject:
   - component: {fileID: 9163881192460425239}
   - component: {fileID: 1553077986449833647}
   - component: {fileID: 2364314026868941626}
+  - component: {fileID: 2550978742431102083}
   m_Layer: 5
   m_Name: LeftHand
   m_TagString: Untagged
@@ -1666,7 +1845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1683,6 +1862,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2550978742431102083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6441428493639274581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b479769aa9abb42b8824e198ffd229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mechHealth: {fileID: 0}
+  targetPart: 4
+  healthyThreshold: 0.6
+  damagedThreshold: 0.3
+  criticalFlashThreshold: 0.05
+  flashFrequency: 2
+  healthyColor: {r: 0.23529412, g: 0.5294118, b: 0.15686275, a: 0.78431374}
+  damagedColor: {r: 0.9607843, g: 0.6117647, b: 0, a: 0.78431374}
+  criticalColor: {r: 0.74509805, g: 0, b: 0, a: 0.78431374}
 --- !u!1 &7015693165830037143
 GameObject:
   m_ObjectHideFlags: 0
@@ -2024,6 +2224,7 @@ GameObject:
   - component: {fileID: 5972708593965631209}
   - component: {fileID: 779164728282675450}
   - component: {fileID: 8822773441809027546}
+  - component: {fileID: 6612292192383816624}
   m_Layer: 5
   m_Name: Body
   m_TagString: Untagged
@@ -2071,7 +2272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2088,6 +2289,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6612292192383816624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8220836338370753147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b479769aa9abb42b8824e198ffd229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mechHealth: {fileID: 0}
+  targetPart: 1
+  healthyThreshold: 0.6
+  damagedThreshold: 0.3
+  criticalFlashThreshold: 0.05
+  flashFrequency: 2
+  healthyColor: {r: 0.19607843, g: 0.47058824, b: 0.11764706, a: 0.78431374}
+  damagedColor: {r: 0.92156863, g: 0.57254905, b: 0, a: 0.78431374}
+  criticalColor: {r: 0.7058824, g: 0, b: 0, a: 0.78431374}
 --- !u!1 &8576595320260866374
 GameObject:
   m_ObjectHideFlags: 0
