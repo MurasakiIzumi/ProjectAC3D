@@ -83,6 +83,13 @@ public class USS_Weapon : MonoBehaviour, IWeapon, IWeaponContinuous
     [Tooltip("要生成的子弹Prefab")]
     public GameObject bulletPrefab;
 
+    [Header("弹道散布")]
+    [Tooltip("是否启用弹道散布")]
+    public bool enableSpread = false;
+
+    [Tooltip("最大散布角度（度）")]
+    public float spreadAngle = 3f;
+
     [Header("音效控制")]
     [Tooltip("完整音效剪辑（含起始音、循环段、尾音）")]
     public AudioClip autoFireSE;
@@ -189,8 +196,6 @@ public class USS_Weapon : MonoBehaviour, IWeapon, IWeaponContinuous
             {
                 targetRotation = Quaternion.LookRotation(transform.forward);
             }
-
-            weaponPivot.rotation = Quaternion.RotateTowards(weaponPivot.rotation, targetRotation, aimRotateSpeed * Time.deltaTime);
         }
         else
         {
@@ -198,22 +203,17 @@ public class USS_Weapon : MonoBehaviour, IWeapon, IWeaponContinuous
             Camera cam = aimingCamera != null ? aimingCamera : Camera.main;
             if (cam != null)
             {
-                // 提取摄像机前方向
-                Vector3 camForward = cam.transform.forward;
-
-                // 将其转化为本地方向
-                Vector3 localDir = transform.InverseTransformDirection(camForward.normalized);
-
-                // 仅计算 Pitch
-                float pitch = -Mathf.Asin(localDir.y) * Mathf.Rad2Deg;
-                pitch = Mathf.Clamp(pitch, -maxPitch, maxPitch);
-
-                // 仅修改 Pitch，保留当前 Yaw
-                Vector3 currentEuler = weaponPivot.localEulerAngles;
-                currentEuler.x = pitch;
-                weaponPivot.localEulerAngles = currentEuler;
+                Vector3 dirToCamForward = cam.transform.forward;
+                targetRotation = Quaternion.LookRotation(dirToCamForward);
+            }
+            else
+            {
+                targetRotation = Quaternion.LookRotation(transform.forward);
             }
         }
+
+        float aimSmoothFactor = 10f;
+        weaponPivot.rotation = Quaternion.Slerp(weaponPivot.rotation, targetRotation, Time.deltaTime * aimSmoothFactor);
     }
 
     public bool CanFire()
@@ -233,7 +233,19 @@ public class USS_Weapon : MonoBehaviour, IWeapon, IWeaponContinuous
 
         if (bulletPrefab && muzzlePoint)
         {
-            Instantiate(bulletPrefab, muzzlePoint.position, muzzlePoint.rotation);
+            Quaternion spreadRotation = muzzlePoint.rotation;
+
+            if (enableSpread && spreadAngle > 0f)
+            {
+                Vector2 randomCircle = Random.insideUnitCircle * Mathf.Tan(spreadAngle * Mathf.Deg2Rad);
+                Vector3 spreadDir = muzzlePoint.forward +
+                                    muzzlePoint.right * randomCircle.x +
+                                    muzzlePoint.up * randomCircle.y;
+
+                spreadRotation = Quaternion.LookRotation(spreadDir.normalized);
+            }
+
+            Instantiate(bulletPrefab, muzzlePoint.position, spreadRotation);
         }
 
         currentAmmo -= ammoPerShot;

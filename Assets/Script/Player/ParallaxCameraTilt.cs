@@ -75,6 +75,7 @@ public class Parallax3DDriver : MonoBehaviour
 
                 if (swayWeight > dynamicThreshold && audioSource != null && stepSE != null)
                 {
+                    audioSource.panStereo *= -1f;
                     audioSource.PlayOneShot(stepSE);
                 }
             }
