@@ -49,7 +49,7 @@ public class HPStatus : MonoBehaviour
         if (image == null)
             Debug.LogWarning("HPStatus 未找到 Image 组件", this);
 
-        alertManager = FindObjectOfType<HPAlert>();
+        alertManager = FindAnyObjectByType<HPAlert>();
     }
 
     void Update()

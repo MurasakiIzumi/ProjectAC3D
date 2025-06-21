@@ -158,12 +158,14 @@ public class USS_Weapon : MonoBehaviour, IWeapon, IWeaponContinuous
         // 自动武器循环段音效维护
         if (fireMode == FireMode.Auto && isLooping)
         {
-            if (!CanFire())
+            if(currentAmmo < ammoPerShot || isReloading)
             {
+                Debug.Log("0");
                 StopLoopSound();
             }
             else if (audioSource.time >= loopEndTime)
             {
+                Debug.Log("1");
                 audioSource.time = loopStartTime;
             }
         }

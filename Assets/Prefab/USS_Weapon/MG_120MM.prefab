@@ -102,9 +102,11 @@ MonoBehaviour:
   aimingCamera: {fileID: 0}
   muzzlePoint: {fileID: 4820551864147582676}
   bulletPrefab: {fileID: 7569516528875139873, guid: 3cf5a9c62118f124883e68e9000aac90, type: 3}
+  enableSpread: 0
+  spreadAngle: 3
   autoFireSE: {fileID: 8300000, guid: d8d2ef9a06823144fadf7b9a4b89bd36, type: 3}
   loopStartTime: 0
-  loopEndTime: 1.4
+  loopEndTime: 1.3
   semiAutoFireSE: {fileID: 0}
 --- !u!82 &7606633011743534761
 AudioSource:

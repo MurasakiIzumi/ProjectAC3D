@@ -52,6 +52,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 265069859847687379, guid: d135c05a92c19964585bf75fe7724848, type: 3}
+      propertyPath: weaponPivot
+      value: 
+      objectReference: {fileID: 2424602682684089377}
+    - target: {fileID: 265069859847687379, guid: d135c05a92c19964585bf75fe7724848, type: 3}
       propertyPath: enableSpread
       value: 1
       objectReference: {fileID: 0}
@@ -133,6 +137,10 @@ PrefabInstance:
       propertyPath: spreadAngle
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2270962516960443125, guid: cdae886344653ce488597b83a8acb3f7, type: 3}
+      propertyPath: weaponPivot
+      value: 
+      objectReference: {fileID: 2424602682684089377}
     - target: {fileID: 2270962516960443125, guid: cdae886344653ce488597b83a8acb3f7, type: 3}
       propertyPath: enableSpread
       value: 1
@@ -248,12 +256,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8052570954059859318, guid: 9e8d6b7492180a14b80522782812e801, type: 3}
+      propertyPath: loopEndTime
+      value: 1.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 8052570954059859318, guid: 9e8d6b7492180a14b80522782812e801, type: 3}
       propertyPath: weaponPivot
       value: 
       objectReference: {fileID: 2424602682684089377}
     - target: {fileID: 8052570954059859318, guid: 9e8d6b7492180a14b80522782812e801, type: 3}
       propertyPath: enableSpread
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8052570954059859318, guid: 9e8d6b7492180a14b80522782812e801, type: 3}
+      propertyPath: loopStartTime
+      value: 0.16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -289,6 +305,10 @@ PrefabInstance:
       propertyPath: spreadAngle
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3439988025941436090, guid: f330301d144bdd54a913a774c966ffc5, type: 3}
+      propertyPath: weaponPivot
+      value: 
+      objectReference: {fileID: 2424602682684089377}
     - target: {fileID: 3439988025941436090, guid: f330301d144bdd54a913a774c966ffc5, type: 3}
       propertyPath: enableSpread
       value: 1

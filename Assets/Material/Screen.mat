@@ -107,7 +107,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _ScanlineDensity: 200
-    - _ScanlineIntensity: 0.5
+    - _ScanlineIntensity: 0.4
     - _ShakeAmplitude: 0.0008
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
