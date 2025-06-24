@@ -15,6 +15,9 @@ public class WeaponCrosshairUI : MonoBehaviour
     [Tooltip("每1度散布角对应准星像素大小（缩放倍率）")]
     public float angleToUIScale = 5f;
 
+    [Tooltip("准星检测时忽略的Layer")]
+    public LayerMask ignoreLayers;
+
     [Tooltip("武器控制器（用于获取当前武器）")]
     public WeaponControl weaponControl;
 
@@ -24,26 +27,39 @@ public class WeaponCrosshairUI : MonoBehaviour
     {
         if (!weaponControl || !canvas || !crosshairRect) return;
 
-        // 默认以右手武器为当前主武器来源（可根据实际逻辑调整）
         currentWeapon = GetPrimaryWeapon();
         if (currentWeapon == null || currentWeapon.muzzlePoint == null || currentWeapon.aimingCamera == null) return;
 
-        // 计算准星世界位置（摄像机正前方向延伸）
-        Vector3 aimPoint = currentWeapon.muzzlePoint.position + currentWeapon.muzzlePoint.forward * aimDistance;
-        Vector3 screenPos = currentWeapon.aimingCamera.WorldToScreenPoint(aimPoint);
+        // 用枪口位置发射 Raycast，检测实际命中点
+        Vector3 aimPoint;
+        RaycastHit hit;
+        Ray ray = new Ray(currentWeapon.muzzlePoint.position, currentWeapon.muzzlePoint.forward);
+        if (Physics.Raycast(ray, out hit, 1000f, ~ignoreLayers))
+        {
+            aimDistance = hit.distance;
+            aimPoint = hit.point;
+        }
+        else
+        {
+            aimDistance = 30f;
+            aimPoint = ray.origin + ray.direction * aimDistance;
+        }
 
-        // 将屏幕坐标转为Canvas本地坐标
+        // 将命中点转换为屏幕坐标 → Canvas坐标
+        Vector3 screenPos = currentWeapon.aimingCamera.WorldToScreenPoint(aimPoint);
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas.GetComponent<RectTransform>(), screenPos, canvas.worldCamera, out Vector2 localPos))
         {
             crosshairRect.localPosition = localPos;
         }
 
-        // 根据当前武器的散布角设置准星大小
+        // 准星大小控制
         float spreadAngle = (currentWeapon.enableSpread) ? currentWeapon.spreadAngle : 0f;
         float size = spreadAngle * angleToUIScale;
         crosshairRect.sizeDelta = new Vector2(size, size);
     }
+
+
 
     // 获取当前使用中的主武器（此处默认取右手组第一把）
     private USS_Weapon GetPrimaryWeapon()

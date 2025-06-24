@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2360550990821282609}
   - component: {fileID: 460915527540923598}
   - component: {fileID: 6518757078318802296}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 3988884064632053988}
   - component: {fileID: 5482510312285562796}
   - component: {fileID: 3775138380155937074}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 8926812819560253252}
   - component: {fileID: -7694072678209508937}
   - component: {fileID: 4141788124788343494}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TestLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
