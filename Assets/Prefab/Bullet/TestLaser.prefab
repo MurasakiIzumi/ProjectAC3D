@@ -308,13 +308,14 @@ MonoBehaviour:
   speed: 50
   lifeTime: 3
   useGravity: 0
+  gravityMultiplier: 1
   damage: 10
   penetrationLevel: 5
   isEnergy: 1
   canPenetrate: 1
   penetrationPower: 1
   penetrationDecay: 1
-  sourceWeapon: {fileID: 0}
+  sourceWeapon: {fileID: 4738776179357985483, guid: 6307727c2b3b6e54790e45ec0a7e7b0b, type: 3}
   hitEffectPrefabValid: {fileID: 0}
   hitEffectPrefabInvalid: {fileID: 0}
   minEnergyRatio: 0.4

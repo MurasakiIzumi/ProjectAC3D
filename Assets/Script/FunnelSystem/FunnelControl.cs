@@ -241,10 +241,14 @@ public class FunnelControl : MonoBehaviour
     {
         if (laserPrefab && firePoint && targetTransform)
         {
-            GameObject laser = Instantiate(laserPrefab, firePoint.position, Quaternion.identity);
-            laser.transform.LookAt(targetTransform.position);
+            // 计算子弹应朝向的方向
+            Vector3 fireDir = (targetTransform.position - firePoint.position).normalized;
+            Quaternion fireRot = Quaternion.LookRotation(fireDir);
 
-            // 在此添加音效播放
+            // 用正确朝向实例化子弹
+            GameObject laser = Instantiate(laserPrefab, firePoint.position, fireRot);
+
+            // 播放音效
             PlayFireSE();
         }
     }

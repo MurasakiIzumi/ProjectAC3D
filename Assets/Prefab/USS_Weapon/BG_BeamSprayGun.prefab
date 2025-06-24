@@ -61,12 +61,16 @@ MonoBehaviour:
   usesReload: 0
   reloadDuration: 2
   sensorUI: {fileID: 0}
+  useAutoAim: 1
   aimRotateSpeed: 120
   maxYaw: 35
   maxPitch: 25
   weaponPivot: {fileID: 4832595441522368639}
+  aimingCamera: {fileID: 0}
   muzzlePoint: {fileID: 3941944464711139231}
   bulletPrefab: {fileID: 7569516528875139873, guid: 5ac95dd0cce1fd042b48308003ce5a3d, type: 3}
+  enableSpread: 0
+  spreadAngle: 3
   autoFireSE: {fileID: 0}
   loopStartTime: 0
   loopEndTime: 0
@@ -193,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 5438676380935066545}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.17, z: 0.63}
+  m_LocalPosition: {x: 0, y: 0.17, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

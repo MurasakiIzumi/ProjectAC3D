@@ -109,6 +109,27 @@ public class SS_GatlingModule : MonoBehaviour, IWeaponContinuous
         if (Physics.Raycast(fireOrigin, fireDir, out RaycastHit hit, fireRange, ~raycastIgnoreLayers))
         {
             impactFX?.PlayImpact(hit.point, hit.normal, hit.collider.tag);
+
+            // 检测是否命中可受伤对象
+            var receiver = hit.collider.GetComponent<IDamageReceiver>();
+            if (receiver != null)
+            {
+                // 构造命中信息
+                BulletHitInfo hitInfo = new BulletHitInfo
+                {
+                    damage = 5f, // 可视需求自行调整
+                    penetrationLevel = 1,
+                    isEnergy = false,
+                    canPenetrate = false,
+                    penetrationPower = 0f,
+                    penetrationDecay = 1f,
+                    hitPoint = hit.point,
+                    hitNormal = hit.normal,
+                    sourceWeapon = this.gameObject
+                };
+
+                receiver.ReceiveBulletHit(hitInfo);
+            }
         }
     }
 

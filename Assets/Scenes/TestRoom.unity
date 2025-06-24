@@ -1922,6 +1922,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2737686408001923397, guid: 3dbd3826a562ebb4f8f3529775003d5e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2782589592020330437, guid: 3dbd3826a562ebb4f8f3529775003d5e, type: 3}
       propertyPath: sensorUI
       value: 
