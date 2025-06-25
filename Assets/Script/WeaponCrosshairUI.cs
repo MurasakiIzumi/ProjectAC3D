@@ -55,7 +55,7 @@ public class WeaponCrosshairUI : MonoBehaviour
 
         // 准星大小控制
         float spreadAngle = (currentWeapon.enableSpread) ? currentWeapon.spreadAngle : 0f;
-        float size = spreadAngle * angleToUIScale;
+        float size = Mathf.Max(spreadAngle * angleToUIScale, 20f);
         crosshairRect.sizeDelta = new Vector2(size, size);
     }
 
