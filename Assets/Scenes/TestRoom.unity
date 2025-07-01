@@ -953,10 +953,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cockpit_v2
       objectReference: {fileID: 0}
-    - target: {fileID: 9082923842656753861, guid: 84e5b2bebc93cf64eb894d7a97161d4c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1567,6 +1563,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cockpit
       objectReference: {fileID: 0}
+    - target: {fileID: 9082923842656753861, guid: 92b38a13368f9bb4f865d12eaf7d13b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1646,7 +1646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6204758744638204612, guid: e397e272d1b2d18479efed379444bf6b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1664,10 +1664,6 @@ PrefabInstance:
     - target: {fileID: 1429881488824977006, guid: fbfe10418c14e514aa92702df3f75581, type: 3}
       propertyPath: m_Name
       value: TestPlayer_v2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1429881488824977006, guid: fbfe10418c14e514aa92702df3f75581, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3733127171196324441, guid: fbfe10418c14e514aa92702df3f75581, type: 3}
       propertyPath: screenMaskArea
